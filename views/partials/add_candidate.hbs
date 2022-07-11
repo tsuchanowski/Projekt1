@@ -1,0 +1,36 @@
+<form method="POST" action="/" onsubmit="return formValidation()">
+
+    <label for="namesurname">Imię i Nazwisko:</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="event">Wydarzenie:</label>
+    <select name="event" id="wydarzenie">
+        <option value="puste">----</option>
+        <option value="FrontEnd-ReactJS">FrontEnd-ReactJS</option>
+        <option value="BackEnd - Node.js">BackEnd-Node.js</option>
+        <option value="Fullstack - MERN">FullStack-MERN</option>
+        <option value="Tester Manualny">Tester Manualny</option>
+    </select>
+
+    <label for="city">Online//Miasto:</label>
+    <select name="city" id="city">
+        <option value="puste">----</option>
+        <option value="ONLINE">Online</option>
+        <option value="WARSZAWA">Warszawa</option>
+        <option value="KRAKÓW">Kraków</option>
+    </select>
+    <br>
+    <button type="submit">ZAPISZ</button>
+</form>
+
+<ul id="errors"></ul>
+
+{{!-- <select id="myselect">
+      <option value="1">value1</option>
+      <option value="2" selected="selected">value2</option>
+      <option value="3">value3</option>
+  </select>
+
+  var selects = document.getElementById("myselect");
+  var selectedValue = selects.options[selects.selectedIndex].value;// will gives u 2
+  var selectedText = selects.options[selects.selectedIndex].text;// gives u value2 --}}

@@ -1,0 +1,17 @@
+{{>header_user}}
+
+<form method="POST"  action="/signup" onsubmit="return logValidation()">
+
+    <label for="użytkownik">Nazwa użytkownika:</label>
+    <input type="text" name="name" id="username">
+    <br>
+    <label for="logowanie">Utwórz hasło:</label>
+    <input type="text" name="login" id="password">
+       
+    <br>
+    <button type="submit">UTWÓRZ KONTO</button>
+</form>
+
+<ul id="errors"></ul> 
+
+{{>footer_user}}

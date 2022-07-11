@@ -1,0 +1,51 @@
+{{>header}}
+
+{{>add_candidate}}
+
+<table border="3" style="width:100%;table-layout:fixed;">
+    <tr>
+        <th class="header" style="width:10%" scope="col">
+            Lp.
+        </th>
+        <th class="header" style="width:25%" scope="col">
+            IMIĘ I NAZWISKO
+        </th>
+        <th class="header" scope="col">
+            WYDARZENIE
+        </th>
+        <th class="header" scope="col">
+            MIASTO
+        </th>
+        <th class="header" style="width:18%" scope="col">
+            AKCJE
+        </th>
+    </tr>
+</table>
+
+{{#each events}}
+<table border="1" style="width:100%;table-layout:fixed;">
+    <tr>
+        <td class="row" rowspan="6" style="width:10%">
+            {{inc @index}}
+        </td>
+        <td class="row" style="width:25%">
+            {{name}}
+        </td>
+        <td class="row">
+            {{event}}
+        </td>
+        <td class="row">
+            {{city}}
+        </td>
+        <td class="row" style="width:18%">
+            <form method="POST" action="/{{_id}}">
+                <button>
+                    USUŃ
+                </button>
+            </form>
+        </td>
+    </tr>
+</table>
+{{/each}}
+
+{{>footer}}

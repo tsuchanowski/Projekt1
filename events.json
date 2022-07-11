@@ -1,0 +1,14 @@
+[
+  {
+    "number": "1",
+    "name": "Leanne Graham",
+    "city": "Warszawa",
+    "event": "FullStack-MERN"
+  },
+  {
+    "number": "1",
+    "name": "Leanne Johns",
+    "city": "Kraków",
+    "event": "FullStack-MERN" 
+  }
+]
