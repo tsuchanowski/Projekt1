@@ -3,14 +3,16 @@
 <form method="POST"  action="/signup" onsubmit="return logValidation()">
 
     <label for="użytkownik">Nazwa użytkownika:</label>
-    <input type="text" name="name" id="username">
+    <input type="text" name="username" id="username">
     <br>
     <label for="logowanie">Utwórz hasło:</label>
-    <input type="text" name="login" id="password">
+    <input type="password" name="password" id="password">
        
     <br>
     <button type="submit">UTWÓRZ KONTO</button>
 </form>
+
+<span>{{message}}</span>
 
 <ul id="errors"></ul> 
 

@@ -1,13 +1,10 @@
 {{>header}}
 
 {{!-- {{>add_candidate}} --}}
-{{>jumper}}
+{{!-- {{>jumper}} --}}
 
 <table border="3" style="width:100%;table-layout:fixed;">
     <tr>
-        <th class="header" style="width:10%" scope="col">
-            Lp.
-        </th>
         <th class="header" style="width:25%" scope="col">
             NAZWA UŻYTKOWNIKA
         </th>
@@ -20,18 +17,12 @@
         <th class="header" scope="col">
             NUMER NIP
         </th>
-        <th class="header" style="width:18%" scope="col">
-            AKCJE
-        </th>
     </tr>
 </table>
 
-{{#each customers}}
+
 <table border="1" style="width:100%;table-layout:fixed;">
     <tr>
-        <td class="row" rowspan="6" style="width:10%">
-            {{inc @index}}
-        </td>
         <td class="row" style="width:25%">
             {{name}}
         </td>
@@ -44,20 +35,50 @@
         <td class="row">
             {{nipnumber}}
         </td>
+    </tr>
+</table>
+<br>
+<br>
+
+<table border="3" style="width:100%;table-layout:fixed;">
+    <tr>
+        <th class="header" style="width:25%" scope="col">
+            DATA KONTAKTU
+        </th>
+        <th class="header" scope="col">
+            RODZAJ AKCJI
+        </th>
+        <th class="header" scope="col">
+            OPIS AKCJI
+        </th>
+        <th class="header" style="width:18%" scope="col">
+            AKCJE
+        </th>
+    </tr>
+</table>
+
+<table border="1" style="width:100%;table-layout:fixed;">
+    <tr>
+        <td class="row" style="width:25%">
+            {{eventdate}}
+        </td>
+        <td class="row">
+            {{action}}
+        </td>
+        <td class="row">
+            {{description}}
+        </td>
         <td class="row" style="width:18%">
-            <form method="POST" action="/{{_id}}">
-                <button>
-                    USUŃ
-                </button>
             </form>
-            <form method="GET" action="/customer_site/{{_id}}">
+            <form method="GET" action="/form_client">
                 <button>
-                    STRONA KLIENTA
+                    DODAJ AKCJĘ
                 </button>
             </form>
         </td>
     </tr>
 </table>
-{{/each}}
+
+
 
 {{>footer_klienta}}

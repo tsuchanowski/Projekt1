@@ -1,74 +1,65 @@
-const express = require("express");
-const router = express.Router();
-const user = require('../controllers/user.controller');
-const passport = require('passport');
+const express = require('express')
+const router = express.Router()
+const userController = require('../controllers/user.controller')
+const passport = require('passport')
+
 
 router.get('/signup', function (req, res) {
-
-  res.render('add_user');
-});
-
-router.post('/signup', function (req, res) {
-
-  user.add(req.body, function (err, user) {
-    if (err) {
-      res.status(404);
-      res.json({
-        error: 'User not created'
-      });
-
-    } else {
-      res.json({ signup: true, username: user })
-    }
-  })
-  res.redirect('/login');
-});
-
-
-
-router.get('/login', function (req, res) {
-
-  res.render('login_user');
+  res.render('add_user')
 })
 
-router.post('/login', function (req, res, next) {
-  passport.authenticate('local-login', { failureRedirect: '/login' }, function (req, res) {
-    res.redirect('/');
-    console.log('router.post/login');
-  }) (req, res, next)
-});
-
-router.get('/login', function (req, res) {
-
-  user.login(req.body, function (err, token) {
+router.post('/signup', function (req, res) {
+  userController.add(req.body, function (err, user) {
     if (err) {
-      res.status(404);
-      res.json({
-        error: 'User not logged'
-      });
-    } else if (token) {
-      res.json({ success: true, jwt: token });
-      res.redirect('/');
+      res.status(404)
+      res.render('add_user', { message: 'nie udało się dodać użytkownika' })
     } else {
-      res.json({ success: false, message: 'username or password do not match' });
+      req.flash('message', 'Dodano użytkownika')
+      res.redirect('/login')
     }
   })
 
-});
+})
 
-// router.post('/login', passport.authenticate('json-custom', { failWithError: true }),
-//     function(req, res) {
-//       res.status(200).json({
-//         authenticated: req.isAuthenticated()
-//       });
-//     },
-//     function(err, req, res, next) {
-//       res.status(400).json({
-//         authenticated: req.isAuthenticated(),
-//         err: err.message
-//       });
-//     }
-//   );
+router.get('/logout', function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      return next(err)
+    }
+    res.redirect('/login')
+  })
 
+})
 
-module.exports = router;
+router.get('/login', userController.isLoggedOut, function (req, res) {
+  res.render('login_user', { message: req.flash('message') })
+})
+
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local-login', function (err, user, info) {
+    console.log('post.login passport.authenticate')
+    console.log(user.username)
+
+    if (err) {
+      return next(err)
+    }
+
+    if (!user) {
+      console.log('NOT user')
+      // req.session.msgCssClass = 'alert-danger'
+      return res.redirect('/login')
+    }
+
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err)
+      }
+
+      console.log('passportCallBack')
+      // req.session.msgCssClass = 'alert-success'
+      return res.redirect('/addcustom')
+    })
+  })(req, res, next)
+})
+
+module.exports = router

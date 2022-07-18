@@ -1,0 +1,36 @@
+{{>header_user}}
+
+{{#if isLoggedIn }}
+  <a href="/logout">Wyloguj</a>
+{{/if}}
+
+<form method="POST" action="/formcustom" onsubmit="return formValidation()">
+
+    <label for="namesurname">Nazwa użytkownika</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="address">Adres:</label>
+    <input type="text" name="address" id="address">
+    <br>
+    <label for="company">Firma/Osoba:</label>
+    <input type="text" name="company" id="company">
+    <br>
+    <label for="number">Numer NIP:</label>
+    <input type="number" name="nipnumber" id="nipnumber">
+    <br>
+    <button type="submit">ZAPISZ</button>
+</form>
+
+<ul id="errors"></ul>
+
+{{>footer_user}}
+
+{{!-- <select id="myselect">
+      <option value="1">value1</option>
+      <option value="2" selected="selected">value2</option>
+      <option value="3">value3</option>
+  </select>
+
+  var selects = document.getElementById("myselect");
+  var selectedValue = selects.options[selects.selectedIndex].value;// will gives u 2
+  var selectedText = selects.options[selects.selectedIndex].text;// gives u value2 --}}

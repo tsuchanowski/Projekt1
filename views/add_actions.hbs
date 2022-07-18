@@ -1,0 +1,30 @@
+{{>header_user}}
+
+{{#if isLoggedIn }}
+<a href="/logout">Wyloguj</a>
+{{/if}}
+
+<form method="POST" action="/user/form_client" onsubmit="return clientValidation()">
+
+    <label for="eventdate">Data kontaktu</label>
+    <input type="text" name="eventdate" id="eventdate">
+    <br>
+    <label for="action">Rodzaj akcji:</label>
+    <select name="action" id="action">
+         <option value="puste">----</option>
+        <option value="telefon">TELEFON</option>
+        <option value="spotkanie">SPOTKANIE</option>
+        <option value="inne">INNE</option>
+    </select>
+    <br>
+    <label for="description">Opis akcji:</label>
+    <input type="text" name="description" id="description">
+    <br>
+    <input type="hidden" value="blabla" name="id" />
+    <button type="submit">ZAPISZ</button>
+</form>
+
+<ul id="errors"></ul>
+
+{{>footer_client}}
+

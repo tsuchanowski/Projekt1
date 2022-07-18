@@ -1,39 +1,67 @@
-const Events = require('../models/Events');
+const Customers = require('../models/Customer');
+const Client = require('../models/Customer');
+
 
 function postList(cb) {
-    Events.find().lean().exec(function (err, events) {
-
+    Customers.find().lean().exec(function (err, customer) {
         if (err) {
             cb(err)
         } else {
-            cb(null, events)
+            cb(null, customer)
+        }
+    })
+};
+
+// .lean().exec
+
+
+function postDelete(id, cb) {
+    Customers.deleteOne({_id: id}, function (err, customer) {
+        if (err) {
+            cb(err);
+        } else {
+            cb(null, customer);
+        }
+    });
+};
+
+
+function postListCustomer(id, cb) {
+    Customers.findOne({_id: id}, function (err, customer) {
+        if (err) {
+            cb(err)
+        } else {
+            cb(null, customer);
         }
     })
 };
 
 function eventAdd(data, cb) {
-    let newEvent = new Events(data);
-    newEvent.save(function (err, event) {
+    let newCustomer = new Customers(data);
+    newCustomer.save(function (err, customer) {
         if (err) {
             cb(err)
         } else {
-            cb(null, event)
+            cb(null, customer)
         }
     })
 };
 
-function postDelete(id, cb) {
-    Events.deleteOne({_id: id},function (err, event) {
+function clientAdd(data, cb) {
+    let newClient = new Client([data.client]);
+    newClient.save(function (err, client) {
         if (err) {
-            cb(err);
+            cb(err)
         } else {
-            cb(null, event);
+            cb(null, client)
         }
-    });
+    })
 };
 
 module.exports = {
     list: postList,
     add: eventAdd,
-    delete: postDelete
+    delete: postDelete,
+    custom: postListCustomer,
+    client: clientAdd
 }
